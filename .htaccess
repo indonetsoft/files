@@ -2,7 +2,16 @@
 	RewriteEngine On
 	RewriteBase /
 
-#.rewrite.htaccess
+# BEGIN APPS
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+<IfModule mod_headers.c>
+	Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Authorization, Origin, Accept, Access-Control-Request-Method, Access-Control-Request-Headers, AppId, AEFW-USERS, AEFW-TOKEN, User, Token, Id, Kode, StLogin, Hash"
+	Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+	Header always set Access-Control-Allow-Origin "*"
+</IfModule>
+# END APPS
 #.own.rewrite.htaccess
 
 	RewriteRule ^(login/?)$ index.php?/users/user/login [L,QSA]
